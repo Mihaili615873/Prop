@@ -1,0 +1,26 @@
+$("body").on("input", "input#PROPERTY_IB_PROVIDER", function ()
+    {
+        $("#providers").append(option[siteIblock]);
+
+        var search_str = this.value.toLowerCase(),
+            conc;
+        // var ops = $("#providers option");
+        $("#providers option").remove();
+        option[siteIblock].each(function (indx, element)
+        {
+            this.text.toLowerCase().indexOf(search_str) !== -1 &&
+                $("#providers").append($(this));
+            this.text.toLowerCase().lastIndexOf(search_str) !== -1 &&
+                $("#providers").append($(this));
+        });
+
+        conc = !$("#providers option").length;
+        conc &&
+            $("#providers").append(
+                $('<option value="-1">Совпадейний не найдено</option>')
+            );
+
+        $("#providers").prop("disabled", conc);
+        $("#providers :selected").prop("selected", false);
+        $("#providers option:first").prop("selected", true);
+    });
